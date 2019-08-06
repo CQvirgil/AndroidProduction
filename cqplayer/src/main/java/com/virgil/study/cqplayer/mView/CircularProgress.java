@@ -7,25 +7,33 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 //圆形进度条
 public class CircularProgress extends View {
+    private final String TAG = "CircularProgress";
     private float width, height;
-    private int percentage  = 20;
+    private double percentage = 0;
     private int offset = 6;
+    private double max = 0;
+    private double value = 0;
 
-    public int getPercentage() {
-        return percentage;
+    public double getMax() {
+        return max;
     }
 
-    public void setPercentage(int percentage) {
-        this.percentage = percentage;
+    public void setMax(double max) {
+        this.max = max;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
         postInvalidate();
-    }
-
-    public CircularProgress(Context context) {
-        super(context);
     }
 
     public CircularProgress(Context context, AttributeSet attrs) {
@@ -57,11 +65,17 @@ public class CircularProgress extends View {
         paint.setStrokeWidth(dip2px(1));
         paint.setAntiAlias(true);
         paint.setDither(true);
-        canvas.drawCircle(width/2,height/2,width/2 - px2dip(offset), paint);
+        canvas.drawCircle(width / 2, height / 2, width / 2 - px2dip(offset), paint);
 
+        if (max != 0 && value != 0) {
+            percentage = value / max * 100;
+        }
+        Log.i(TAG, "onDraw: max" + max);
+        Log.i(TAG, "onDraw: value" + value);
+        Log.i(TAG, "onDraw: percentage" + percentage);
         paint.setColor(Color.parseColor("#e7af00"));
-        RectF oval = new RectF(px2dip(offset),px2dip(offset),width - px2dip(offset),height - px2dip(offset));
-        canvas.drawArc(oval,-90,percentage * 3.6f,false,paint);
+        RectF oval = new RectF(px2dip(offset), px2dip(offset), width - px2dip(offset), height - px2dip(offset));
+        canvas.drawArc(oval, -90, (float) (percentage * 3.6f), false, paint);
     }
 
     private int dip2px(float dipValue) {

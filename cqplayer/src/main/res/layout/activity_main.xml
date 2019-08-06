@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notice"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +8,16 @@
     android:background="#fff"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_music_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/border_top"
@@ -18,61 +28,60 @@
             android:id="@+id/music_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_launcher_round" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@id/music_icon"
-            android:orientation="vertical"
-            android:layout_centerVertical="true">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/music_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:maxWidth="185dp"
-                android:textSize="13sp"
-                android:text="@string/app_name"
                 android:layout_marginLeft="10dp"
-                />
+                android:maxWidth="185dp"
+                android:maxLines="1"
+                android:text="@string/app_name"
+                android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/music_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:text="01:00/10:00"/>
+                android:text="01:00/10:00"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
 
         <RelativeLayout
-            android:layout_toLeftOf="@id/imgbtn_music_list"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:layout_centerVertical="true">
+            android:layout_toLeftOf="@id/imgbtn_music_list">
 
             <ImageButton
                 android:id="@+id/music_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@mipmap/btn_music_pause"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                />
+                android:layout_centerVertical="true"
+                android:background="@mipmap/btn_music_pause" />
 
             <com.virgil.study.cqplayer.mView.CircularProgress
+                android:id="@+id/music_circularprogress"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                />
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
 
@@ -80,10 +89,10 @@
             android:id="@+id/imgbtn_music_list"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/btn_music_list"/>
+            android:background="@mipmap/btn_music_list" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

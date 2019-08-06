@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/dialog_base_root"
+        android:background="@drawable/dialog_background"
+        android:theme="@style/ActionSheetDialogStyle"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+        <LinearLayout
+            android:id="@+id/item_music_list_top"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            tools:ignore="Orientation">
+
+
+        </LinearLayout>
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/dialog_base_music_list"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

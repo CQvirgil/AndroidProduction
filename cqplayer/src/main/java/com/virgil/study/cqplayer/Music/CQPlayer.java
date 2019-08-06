@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class CQPlayer {
     private static CQPlayer player;
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     private String url;
     private Context context;
     private boolean isOnCompletion;
@@ -29,13 +29,13 @@ public class CQPlayer {
         synchronized (CQPlayer.class){
             if (player == null){
                 player = new CQPlayer(context);
+                mediaPlayer = new MediaPlayer();
             }
             return player;
         }
     }
 
     public void set(MusicInfo music) throws IOException {
-        this.mediaPlayer = new MediaPlayer();
         this.music = music;
         url = music.getUrl();
         Log.i("testmediaplayer", url);
@@ -72,11 +72,24 @@ public class CQPlayer {
         mediaPlayer = null;
     }
 
+    public void next(MusicInfo music) throws IOException {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+        mediaPlayer = new MediaPlayer();
+        set(music);
+        play();
+    }
+
     public void pause(){
         mediaPlayer.pause();
     }
 
     public boolean isPlaying(){
         return mediaPlayer.isPlaying();
+    }
+
+    public int getCurrenPosition(){
+        return mediaPlayer.getCurrentPosition();
     }
 }

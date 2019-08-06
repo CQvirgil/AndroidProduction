@@ -4,7 +4,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.virgil.study.cqplayer.Music.MusicInfo;
 
@@ -15,6 +17,9 @@ import java.util.List;
 public class Util {
     private final String TAG = "Util";
     Context context;
+    public static int width, height;
+
+
 
     public Util(Context context) {
         this.context = context;
@@ -52,7 +57,7 @@ public class Util {
                 int duration = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
                 //文件路径
                 String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-                 MusicInfo musicInfo = new MusicInfo(title, url, duration, singer, album, size);
+                MusicInfo musicInfo = new MusicInfo(title, url, duration, singer, album, size);
                 list.add(musicInfo);
                 Log.i(TAG,title + "\n" + url + "\n" + duration);
             } while (cursor.moveToNext());
@@ -62,4 +67,5 @@ public class Util {
         }
         return list;
     }
+
 }
