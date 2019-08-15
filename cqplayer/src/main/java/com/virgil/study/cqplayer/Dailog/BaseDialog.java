@@ -45,21 +45,12 @@ public class BaseDialog extends Dialog {
         initView();
     }
 
+    public void setMusicAdapter(MusicListAdapter adapter){
+        music_list.setAdapter(adapter);
+    }
+
     private void initView(){
         music_list = findViewById(R.id.dialog_base_music_list);
         music_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        MusicListAdapter adapter = new MusicListAdapter();
-        adapter.setOnItemClickListaner(new MusicListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int postition) {
-                try {
-                    CQPlayer.getInstance(getContext()).next(MusicData.getInstance().getMusicList().get(postition));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.i("CQPlayerError", "文件IO错误： " + e.getMessage());
-                }
-            }
-        });
-        music_list.setAdapter(adapter);
     }
 }

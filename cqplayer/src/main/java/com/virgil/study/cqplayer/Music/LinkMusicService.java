@@ -8,7 +8,7 @@ public interface LinkMusicService {
     public int getDuration();
     public int getCurrenPosition();
     public void Seekto(int mesc);
-    public void setUrl(String musicurl);
+    public void resetMusic(int index);
     public void Continue();
     public boolean getisOnCompletion();
 }

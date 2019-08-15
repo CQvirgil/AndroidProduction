@@ -5,7 +5,7 @@ import java.util.List;
 public class MusicData {
     private List<MusicInfo> musicList;
     private static MusicData instance;
-    private int index;
+    public static int index = 0;
 
     private MusicData() {
     }
@@ -19,12 +19,12 @@ public class MusicData {
         return instance;
     }
 
-    public int getIndex() {
+    public static int getIndex() {
         return index;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public static void setIndex(int index) {
+        MusicData.index = index;
     }
 
     public List<MusicInfo> getMusicList() {
@@ -33,5 +33,34 @@ public class MusicData {
 
     public void setMusicList(List<MusicInfo> musicList) {
         this.musicList = musicList;
+    }
+
+    public MusicInfo getMusic(){
+        return musicList.get(index);
+    }
+
+    public void random(){
+        index = (int) (Math.random() * (musicList.size() - 1));
+    }
+
+    public void next(){
+        if(index < musicList.size()){
+            index ++;
+        }else{
+            index = musicList.size() - 1;
+        }
+    }
+
+    public void back(){
+        if(index > 0){
+          index --;
+        }else{
+            index = 0;
+        }
+    }
+
+    public void clear(){
+        musicList.clear();
+        musicList = null;
     }
 }

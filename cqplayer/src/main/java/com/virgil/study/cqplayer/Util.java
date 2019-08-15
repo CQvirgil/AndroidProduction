@@ -8,30 +8,24 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 
+import com.virgil.study.cqplayer.Music.MusicData;
 import com.virgil.study.cqplayer.Music.MusicInfo;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Util {
-    private final String TAG = "Util";
-    Context context;
-    public static int width, height;
+    private static final String TAG = "Util";
 
-
-
-    public Util(Context context) {
-        this.context = context;
-    }
-
-    public List<MusicInfo> getMusic() throws IOException {
+    public static void getMusic(Context context) throws IOException {
         List<MusicInfo> list = new ArrayList<>();
         Log.i(TAG, "getMusic: getMusicURL");
         ContentResolver cr = context.getContentResolver();
         if (cr == null) {
             Log.e(TAG, "getMusic: null");
-            return null;
         }
 
 // 获取所有歌曲
@@ -40,7 +34,6 @@ public class Util {
 
         if (cursor == null) {
             Log.e(TAG, "getMusic: 没找到文件");
-            return null;
         }
 
         if (cursor.moveToFirst()) {
@@ -59,13 +52,14 @@ public class Util {
                 String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                 MusicInfo musicInfo = new MusicInfo(title, url, duration, singer, album, size);
                 list.add(musicInfo);
+
                 Log.i(TAG,title + "\n" + url + "\n" + duration);
             } while (cursor.moveToNext());
         } else {
             Log.e("getmusic", "null");
-            return null;
         }
-        return list;
+        MusicData.getInstance().setMusicList(list);
+        EventBus.getDefault().post(EventMsg.getInstance("play"));
     }
 
 }
